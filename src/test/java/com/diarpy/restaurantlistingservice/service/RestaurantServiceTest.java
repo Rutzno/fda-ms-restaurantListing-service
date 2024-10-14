@@ -38,7 +38,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    void testFindAllRestaurants() {
+    public void testFindAllRestaurants() {
         // Mock the repository behavior
         List<Restaurant> mockRestaurants = Arrays.asList(
                 new Restaurant(1, "Restaurant 1", "Address 1", "city 1", "Description 1"),
@@ -58,7 +58,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    void testAddRestaurant() {
+    public void testAddRestaurant() {
         // Mock the repository behavior
         RestaurantDto mockRestaurantDTO = new RestaurantDto(1, "Restaurant 1", "address 1", "city 1", "description 1");
         Restaurant mockRestaurant = RestaurantMapper.INSTANCE.toRestaurant(mockRestaurantDTO);
@@ -71,7 +71,7 @@ class RestaurantServiceTest {
     }
 
     @Test
-    void testFindRestaurantById_ExistingID() {
+    public void testFindRestaurantById_ExistingID() {
         // Mock the repository behavior
         Integer restaurantId = 1;
         Restaurant mockRestaurant = new Restaurant(1, "Restaurant 1", "address 1", "city 1", "description 1");
@@ -80,12 +80,12 @@ class RestaurantServiceTest {
         ResponseEntity<RestaurantDto> response = restaurantService.findRestaurantById(restaurantId);
         // Verify the response
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(mockRestaurant.getId(), response.getBody().getId());
+        assertEquals(restaurantId, response.getBody().getId());
         verify(restaurantRepo, times(1)).findById(restaurantId);
     }
 
     @Test
-    void testFindRestaurantById_NoExistingID() {
+    public void testFindRestaurantById_NoExistingID() {
         // Mock the repository behavior
         Integer restaurantId = 1;
         when(restaurantRepo.findById(restaurantId)).thenReturn(Optional.empty());

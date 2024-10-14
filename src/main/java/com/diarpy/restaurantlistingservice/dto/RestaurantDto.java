@@ -4,6 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Mack_TB
+ * @since 28/09/2024
+ * @version 1.0.0
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
