@@ -6,6 +6,7 @@ pipeline {
         VERSION = "${env.BUILD_ID}"
         GIT_REPO = "git@github.com:Rutzno/fda-deployment.git"
         GIT_BRANCH = "main"
+        SONAR_URL = "http://sonarqube2:9000/"
     }
 
     tools {
@@ -27,7 +28,7 @@ pipeline {
 
         stage("Sonar Analysis QUALITY") {
             steps {
-                sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://sonarqube2:9000/ -Dsonar.login=sqa_ef704fec902b0bec4c0dad44c950090d40c558d6"
+                sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=${SONAR_URL} -Dsonar.login=sqa_ef704fec902b0bec4c0dad44c950090d40c558d6"
             }
         }
 
@@ -35,7 +36,7 @@ pipeline {
             steps {
                 script {
                     def token = "sqa_ef704fec902b0bec4c0dad44c950090d40c558d6"
-                    def sonarQubeUrl = "http://sonarqube2:9000/api"
+                    def sonarQubeUrl = "${SONAR_URL}api"
                     def componentKey = "com.diarpy:restaurantListing-service"
                     def coverageThreshold = 80.0
                     def response = sh (
