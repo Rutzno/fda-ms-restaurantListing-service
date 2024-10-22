@@ -27,15 +27,15 @@ pipeline {
 
         stage("Sonar Analysis QUALITY") {
             steps {
-                sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://ecb8-217-64-100-209.ngrok-free.app:9000/ -Dsonar.login=sqa_6a37e864356fcfda1b77768d8da40df113627ee5"
+                sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=http://sonarqube2:9000/ -Dsonar.login=sqa_ef704fec902b0bec4c0dad44c950090d40c558d6"
             }
         }
 
         stage("Check code Coverage QUALITY") {
             steps {
                 script {
-                    def token = ""
-                    def sonarQubeUrl = "https://ecb8-217-64-100-209.ngrok-free.app:9000/api"
+                    def token = "sqa_ef704fec902b0bec4c0dad44c950090d40c558d6"
+                    def sonarQubeUrl = "http://sonarqube2:9000/api"
                     def componentKey = "com.diarpy:restaurantListing-service"
                     def coverageThreshold = 80.0
                     def response = sh (
