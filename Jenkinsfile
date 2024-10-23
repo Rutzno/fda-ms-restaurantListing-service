@@ -71,7 +71,7 @@ pipeline {
 
         stage("Update Image Tag in GitOps") {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: $GIT_REPO]])
+                checkout scmGit(branches: [[name: "*/${GIT_BRANCH}"]], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: "${GIT_REPO}"]])
                 script {
                     // Set the new image tag with the Jenkins build number
                     sh '''
