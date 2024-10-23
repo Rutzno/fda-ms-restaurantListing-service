@@ -75,8 +75,8 @@ pipeline {
                 script {
                     // Set the new image tag with the Jenkins build number
                     sh '''
-			# git config user.email "d.rutzno@gmail.com"
-                	# git config user.name "Rutzno"
+			git config user.email "d.rutzno@gmail.com"
+                	git config user.name "Rutzno"
                         sed -i "s/image:.*/image: macktb\\/restaurantlisting-service:${VERSION}/" aws/restaurant-manifest.yml
 			git checkout ${GIT_BRANCH}
                     	git add .
